@@ -13,7 +13,7 @@ let config = {
     },
     backgroundColor: '#cea7d2',
     audio: {
-        disableWebAudio: true
+        disableWebAudio: false
     },
     autoCenter: true
 };
@@ -45,7 +45,6 @@ function preload() {
     
     this.load.image('head', './assets/clochetteHead-01.png');
     this.load.image('body', './assets/clochetteBody-01.png');
-//    this.load.image('handL', './assets/clochetteHandR-01.png');
     this.load.image('handR', './assets/clochetteHandR-01.png');
     this.load.image('legL', './assets/clochetteLegL-01.png');
     this.load.image('legR', './assets/clochetteLegR-01.png');
@@ -100,9 +99,7 @@ function create() {
     //----les membres-----
     var head = this.add.image(300, 420, 'head', Phaser.Math.RND.pick(frames)).setInteractive();
     this.input.setDraggable(head);
-//    head.setScale(2);
     head.setName('head');
-//    head.setScale(0.45);
     
     successfulDropoff = 0;
     
@@ -113,27 +110,19 @@ function create() {
     var body = this.add.image(95, 430, 'body', Phaser.Math.RND.pick(frames)).setInteractive();
     this.input.setDraggable(body);
     body.setName('body');
-//    body.setScale(0.45);
-    
-//    var handL = this.add.image(310, 92, 'handL', Phaser.Math.RND.pick(frames)).setInteractive();
-//    this.input.setDraggable(handL);
-//    handL.setName('handL');
-//    handL.setScale(0.45);
+
     
     var handR = this.add.image(50, 212, 'handR', Phaser.Math.RND.pick(frames)).setInteractive();
     this.input.setDraggable(handR);
     handR.setName('handR');
-//    hips.setScale(0.45);
     
     var legL = this.add.image(220, 552, 'legL', Phaser.Math.RND.pick(frames)).setInteractive();
     this.input.setDraggable(legL);
     legL.setName('legL');
-//    legL.setScale(0.45);
     
     var legR = this.add.image(310, 570, 'legR', Phaser.Math.RND.pick(frames)).setInteractive();
     this.input.setDraggable(legR);
     legR.setName('legR');
-//    legR.setScale(0.45);
     
     //-----les drop zones----
     //  A drop zone
@@ -143,11 +132,6 @@ function create() {
     //  A drop zone
     var zone2 = this.add.zone(200, 170, 80, 200).setRectangleDropZone(80, 200);
     zone2.setName('body');
-    
-    //  A drop zone
-//    var zone3 = this.add.zone(135, 221, 65, 130).setRectangleDropZone(65, 130);
-//    zone3.setName('handL');
-    
     
     //  A drop zone
     var zone4 = this.add.zone(210, 311, 90, 30).setRectangleDropZone(90, 30);
@@ -161,20 +145,6 @@ function create() {
     var zone6 = this.add.zone(290, 215, 40, 60).setRectangleDropZone(40, 60);
     zone6.setName('handR');
     
-//          var graphics = this.add.graphics();
-//    graphics.lineStyle(2, 0xffff00);
-//    graphics.strokeRect(zone.x - zone.input.hitArea.width / 2, zone.y - zone.input.hitArea.height / 2, zone.input.hitArea.width, zone.input.hitArea.height);
-//    
-//    graphics.strokeRect(zone2.x - zone2.input.hitArea.width / 2, zone2.y - zone2.input.hitArea.height / 2, zone2.input.hitArea.width, zone2.input.hitArea.height);
-//    
-//
-//    
-//    graphics.strokeRect(zone4.x - zone4.input.hitArea.width / 2, zone4.y - zone4.input.hitArea.height / 2, zone4.input.hitArea.width, zone4.input.hitArea.height);
-//    
-//    graphics.strokeRect(zone5.x - zone5.input.hitArea.width / 2, zone5.y - zone5.input.hitArea.height / 2, zone5.input.hitArea.width, zone5.input.hitArea.height);
-//    
-//        graphics.strokeRect(zone6.x - zone6.input.hitArea.width / 2, zone6.y - zone6.input.hitArea.height / 2, zone6.input.hitArea.width, zone6.input.hitArea.height);
-
  
     this.input.on('dragstart', function (pointer, gameObject) {
 
@@ -204,8 +174,6 @@ function create() {
             gameObject.y = dropZone.y;
 
             gameObject.input.enabled = false;
-            console.log(dropZone.name == gameObject.name);
-            console.log('successful dropoff of ' + gameObject.name + ' in ' + dropZone.name);
             
             successfulDropoff++;
             correctSound.play();
@@ -213,7 +181,6 @@ function create() {
 else{
             gameObject.x = gameObject.input.dragStartX;
             gameObject.y = gameObject.input.dragStartY;
-            console.log('failed dropoff of ' + gameObject.name + ' in ' + dropZone.name);
     
             wrongSound.play();
         }
@@ -230,7 +197,6 @@ else{
         }
         
       if(successfulDropoff === 5){
-            console.log("well done!!!!");
             nextArrow.setVisible(true);
             nextArrow.setInteractive();
           finishSound.play();
@@ -259,7 +225,6 @@ function update() {
         }
 }
 function onClick(){
-//    window.open("https://www.google.com", "_blank");
     window.location.replace("https://games.caramel.be/captain-hook/index.html");
 
 }
